@@ -88,6 +88,8 @@ button{font-family:inherit;}
 /* ================================================
    NAV
    ================================================ */
+.moex-topbar{display:none;}
+.moex-scrim{display:none;}
 .moex-nav{
   position:fixed;top:0;left:0;right:0;z-index:500;
   display:flex;justify-content:center;gap:2px;
@@ -101,7 +103,7 @@ button{font-family:inherit;}
   border:1px solid var(--moex-ash);border-bottom:none;
   box-shadow:0 4px 24px var(--moex-shadow);
 }
-.moex-nav a{
+.moex-nav-inner a{
   font-family:var(--moex-font-mono);
   font-size:.68rem;letter-spacing:.14em;
   color:var(--moex-bone-dim);
@@ -112,14 +114,80 @@ button{font-family:inherit;}
   transition:color .25s, background .25s;
   white-space:nowrap;
 }
-.moex-nav a:last-child{border-right:none;}
-.moex-nav a::before{
+.moex-nav-inner a:last-child{border-right:none;}
+.moex-nav-inner a::before{
   content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;
   background:var(--moex-blood-bright);transform:scaleX(0);transform-origin:left;
   transition:transform .3s;
 }
-.moex-nav a:hover, .moex-nav a.moex-active{color:var(--moex-bone);background:rgba(122,14,14,.15);}
-.moex-nav a:hover::before, .moex-nav a.moex-active::before{transform:scaleX(1);}
+.moex-nav-inner a:hover, .moex-nav-inner a.moex-active{color:var(--moex-bone);background:rgba(122,14,14,.15);}
+.moex-nav-inner a:hover::before, .moex-nav-inner a.moex-active::before{transform:scaleX(1);}
+
+/* ---- mobile: title + menu button, links slide in from the side ---- */
+@media(max-width:860px){
+  html{scroll-padding-top:60px;}
+  .moex-nav{
+    display:block;padding:0;pointer-events:all;
+    background:rgba(10,8,6,.95);
+    border-bottom:1px solid var(--moex-ash);
+  }
+  .moex-topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    height:58px;padding:0 6px 0 18px;position:relative;z-index:2;
+  }
+  .moex-brand{
+    font-family:var(--moex-font-display);font-weight:700;font-size:1.15rem;
+    letter-spacing:.16em;color:var(--moex-bone);text-transform:uppercase;
+    display:flex;align-items:center;
+  }
+  .moex-brand::before{
+    content:"";width:8px;height:8px;border-radius:50%;margin-right:10px;
+    background:var(--moex-blood-bright);box-shadow:0 0 10px rgba(196,24,24,.8);
+  }
+  .moex-burger{
+    width:48px;height:48px;padding:0;background:none;border:none;
+    color:var(--moex-bone);cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .moex-burger span{
+    display:block;width:24px;height:2px;background:currentColor;
+    transition:transform .3s, opacity .2s;
+  }
+  .moex-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .moex-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .moex-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+  .moex-nav-inner{
+    position:fixed;top:0;right:0;bottom:0;z-index:1;
+    width:min(80vw,300px);
+    flex-direction:column;
+    border:none;border-left:1px solid var(--moex-ash);
+    padding:76px 0 24px;overflow-y:auto;
+    box-shadow:-10px 0 40px rgba(0,0,0,.6);
+    transform:translateX(100%);visibility:hidden;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), visibility 0s linear .35s;
+  }
+  body.moex-menu-open .moex-nav-inner{
+    transform:none;visibility:visible;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), visibility 0s;
+  }
+  .moex-nav-inner a{
+    font-size:.82rem;padding:19px 26px;
+    border-right:none;border-bottom:1px solid rgba(77,70,60,.5);
+    border-left:3px solid transparent;
+  }
+  .moex-nav-inner a::before{display:none;}
+  .moex-nav-inner a:hover, .moex-nav-inner a.moex-active{border-left-color:var(--moex-blood-bright);}
+
+  .moex-scrim{
+    display:block;position:fixed;inset:0;z-index:499;
+    background:rgba(5,3,2,.72);
+    opacity:0;pointer-events:none;transition:opacity .3s;
+  }
+  body.moex-menu-open .moex-scrim{opacity:1;pointer-events:all;}
+  body.moex-menu-open{overflow:hidden;}
+}
 
 /* ================================================
    HERO
@@ -339,7 +407,7 @@ button{font-family:inherit;}
    EVIDENCE WALL (imported from Brown template)
    ================================================ */
 .moex-wall{
-  position:relative;max-width:960px;margin:0 auto;height:620px;
+  position:relative;max-width:960px;margin:0 auto;height:600px;
   background:
     repeating-linear-gradient(0deg, rgba(233,221,199,.03) 0 2px, transparent 2px 40px),
     repeating-linear-gradient(90deg, rgba(233,221,199,.03) 0 2px, transparent 2px 40px),
@@ -368,20 +436,49 @@ button{font-family:inherit;}
 .moex-pin-art svg{width:52px;height:52px;}
 .moex-pin-cap{color:#4a3c2c;line-height:1.4;letter-spacing:.03em;}
 
-.moex-pin.p1{top:4%;left:4%;transform:rotate(-4deg);}
-.moex-pin.p2{top:8%;left:34%;transform:rotate(3deg);}
-.moex-pin.p3{top:2%;left:63%;transform:rotate(-2deg);}
-.moex-pin.p4{top:42%;left:12%;transform:rotate(2deg);}
-.moex-pin.p5{top:46%;left:42%;transform:rotate(-3deg);}
-.moex-pin.p6{top:40%;left:71%;transform:rotate(4deg);}
-.moex-pin.p7{top:78%;left:24%;transform:rotate(-2deg);}
-.moex-pin.p8{top:74%;left:56%;transform:rotate(3deg);}
+.moex-pin.p1{top:5%;left:5%;transform:rotate(-4deg);}
+.moex-pin.p2{top:9%;left:35%;transform:rotate(3deg);}
+.moex-pin.p3{top:3%;left:64%;transform:rotate(-2deg);}
+.moex-pin.p4{top:54%;left:12%;transform:rotate(2deg);}
+.moex-pin.p5{top:58%;left:42%;transform:rotate(-3deg);}
+.moex-pin.p6{top:52%;left:71%;transform:rotate(4deg);}
 
 @media(max-width:860px){
-  .moex-wall{height:auto;padding:24px 16px;display:flex;flex-direction:column;gap:18px;}
+  .moex-wall{
+    height:auto;padding:30px 14px 26px;
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 14px;
+  }
   .moex-wall svg.moex-strings{display:none;}
-  .moex-pin{position:static;width:100%;transform:none !important;}
+  .moex-pin{position:static;width:100%;padding:12px 8px 12px;font-size:.62rem;}
+  .moex-pin-art{height:78px;margin-bottom:6px;}
+  .moex-pin-art svg{width:42px;height:42px;}
+  .moex-wall .moex-pin:nth-of-type(odd){transform:rotate(-2deg) !important;}
+  .moex-wall .moex-pin:nth-of-type(even){transform:rotate(2deg) !important;}
+  .moex-wall .moex-pin:hover,.moex-wall .moex-pin:focus-visible,.moex-wall .moex-pin:active{
+    transform:translateY(-4px) scale(1.03) !important;
+  }
 }
+
+/* wall progress counter */
+.moex-wall-progress{
+  max-width:960px;margin:0 auto 14px;display:flex;align-items:center;gap:12px;
+  font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.16em;
+  color:var(--moex-brass);text-transform:uppercase;
+}
+.moex-wall-progress-bar{flex:1;height:3px;background:var(--moex-ash);position:relative;overflow:hidden;}
+.moex-wall-progress-bar i{
+  position:absolute;inset:0;width:100%;background:var(--moex-blood-bright);
+  transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.7,.2,1);
+  box-shadow:0 0 8px rgba(196,24,24,.7);
+}
+.moex-wall-progress.moex-done{color:var(--moex-rose);}
+.moex-pin.moex-seen::after{
+  content:"EXAMINED";position:absolute;right:6px;bottom:8px;
+  font-family:var(--moex-font-stencil);font-size:.5rem;letter-spacing:.08em;
+  color:var(--moex-blood-bright);border:1.5px solid var(--moex-blood-bright);
+  padding:1px 4px;transform:rotate(-8deg);opacity:.85;pointer-events:none;
+}
+.moex-pin.moex-active-pin{outline:1px solid var(--moex-blood-bright);outline-offset:3px;}
 
 .moex-note{
   display:none;max-width:720px;margin:26px auto 0;
@@ -432,6 +529,14 @@ button{font-family:inherit;}
 .moex-photo-caption{
   font-family:var(--moex-font-mono);font-size:.68rem;color:#1a1510;
   text-align:center;margin-top:10px;letter-spacing:.03em;
+}
+
+@media(max-width:860px){
+  .moex-corkboard{padding:44px 14px 34px;min-height:0;}
+  .moex-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 14px;}
+  .moex-photo{padding:6px 6px 26px;}
+  .moex-photo::before{width:12px;height:12px;top:-8px;}
+  .moex-photo-caption{font-size:.58rem;margin-top:8px;line-height:1.35;}
 }
 
 /* ================================================
@@ -625,29 +730,72 @@ input[type=range]::-moz-range-thumb{
 .moex-modal-nav button:hover{background:#5c4b32;color:#efe6d3;}
 
 /* ================================================
-   COMPATIBILITY / WOLF x BUNNY
+   CASE TIMELINE
    ================================================ */
-.moex-compat{
-  position:relative;border:1px solid var(--moex-ash);overflow:hidden;
+.moex-timeline{position:relative;max-width:720px;margin:0 auto;padding-left:34px;}
+.moex-timeline::before{
+  content:"";position:absolute;left:11px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(var(--moex-blood-bright), var(--moex-ash) 85%, transparent);
 }
-.moex-compat-panels{display:grid;grid-template-columns:1fr 1fr;min-height:340px;}
-.moex-compat-wolf,.moex-compat-bunny{padding:40px 34px;position:relative;}
-.moex-compat-wolf{background:linear-gradient(135deg,#2a0808,#0a0605);}
-.moex-compat-bunny{background:linear-gradient(135deg,#241d18,#0e0b09);}
-.moex-compat h4{font-family:var(--moex-font-stencil);font-size:1.1rem;letter-spacing:.05em;margin-bottom:16px;}
-.moex-compat-wolf h4{color:var(--moex-blood-bright);}
-.moex-compat-bunny h4{color:var(--moex-rose);}
-.moex-compat ul{list-style:none;padding:0;margin:0;font-family:var(--moex-font-body);font-size:1.1rem;color:var(--moex-bone-dim);}
-.moex-compat li{padding:6px 0;border-bottom:1px dotted var(--moex-ash);}
-.moex-compat-slider-row{padding:20px 34px 30px;border-top:1px solid var(--moex-ash);background:var(--moex-paper);}
-.moex-compat-slider-row input[type=range]{width:100%;}
-.moex-compat-readout{
-  text-align:center;font-family:var(--moex-font-mono);font-size:.75rem;letter-spacing:.1em;
-  color:var(--moex-brass);margin-top:12px;min-height:1.3em;
+.moex-tl-item{position:relative;padding-bottom:26px;}
+.moex-tl-item:last-child{padding-bottom:0;}
+.moex-tl-item::before{
+  content:"";position:absolute;left:-29px;top:20px;width:11px;height:11px;border-radius:50%;
+  background:var(--moex-void);border:2px solid var(--moex-blood-bright);
+  box-shadow:0 0 0 4px var(--moex-void);
 }
-.moex-compat-center{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
-  font-size:1.6rem;pointer-events:none;filter:drop-shadow(0 0 12px rgba(196,24,24,.6));
+.moex-tl-item.moex-tl-now::before{
+  background:var(--moex-blood-bright);
+  animation:moex-tl-pulse 2s ease-out infinite;
+}
+@keyframes moex-tl-pulse{
+  0%{box-shadow:0 0 0 4px var(--moex-void), 0 0 0 4px rgba(196,24,24,.6);}
+  100%{box-shadow:0 0 0 4px var(--moex-void), 0 0 0 16px rgba(196,24,24,0);}
+}
+body.moex-js .moex-tl-item{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
+body.moex-js .moex-tl-item.moex-in{opacity:1;transform:none;}
+
+.moex-tl-card{
+  border:1px solid var(--moex-ash);
+  background:linear-gradient(180deg,rgba(28,21,13,.7),rgba(10,8,6,.5));
+  transition:border-color .25s;
+}
+.moex-tl-card[open], .moex-tl-card:hover{border-color:var(--moex-brass-dim);}
+.moex-tl-card summary{
+  list-style:none;cursor:pointer;min-height:44px;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  padding:18px 18px;-webkit-tap-highlight-color:transparent;
+}
+.moex-tl-card summary::-webkit-details-marker{display:none;}
+.moex-tl-card summary:focus-visible{outline:1px solid var(--moex-brass);outline-offset:-4px;}
+.moex-tl-text{display:flex;flex-direction:column;gap:6px;min-width:0;}
+.moex-tl-meta{
+  font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.2em;
+  color:var(--moex-brass);text-transform:uppercase;
+}
+.moex-tl-title{font-family:var(--moex-font-display);font-weight:700;font-size:1.2rem;color:var(--moex-bone);}
+.moex-tl-line{font-size:1.08rem;line-height:1.5;font-style:italic;color:var(--moex-bone-dim);}
+.moex-tl-toggle{
+  flex:0 0 auto;width:28px;height:28px;border:1px solid var(--moex-ash);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--moex-font-mono);color:var(--moex-brass);
+  transition:background .25s, border-color .25s;
+}
+.moex-tl-toggle::before{content:"+";}
+.moex-tl-card[open] .moex-tl-toggle{background:rgba(122,14,14,.28);border-color:var(--moex-blood-bright);}
+.moex-tl-card[open] .moex-tl-toggle::before{content:"\2212";}
+.moex-tl-detail{
+  margin:0 18px;padding:16px 0 20px;border-top:1px dashed var(--moex-ash);
+  animation:moexFadeTab .4s ease;
+}
+.moex-tl-detail p{margin:0;font-size:1.08rem;line-height:1.7;font-style:italic;color:var(--moex-rose);}
+@media(max-width:520px){
+  .moex-timeline{padding-left:30px;}
+  .moex-timeline::before{left:9px;}
+  .moex-tl-item::before{left:-27px;}
+  .moex-tl-card summary{padding:16px 14px;}
+  .moex-tl-detail{margin:0 14px;}
+  .moex-tl-title{font-size:1.1rem;}
 }
 
 /* ================================================
@@ -684,10 +832,77 @@ input[type=range]::-moz-range-thumb{
 
 /* utility */
 .moex-hidden{display:none!important;}
-.moex-mute-btn{
-  position:fixed;bottom:20px;right:20px;z-index:400;
-  background:var(--moex-paper);border:1px solid var(--moex-ash);color:var(--moex-bone-dim);
-  width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1rem;
+.moex-totop{
+  position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom, 0px));z-index:400;
+  width:46px;height:46px;padding:0;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--moex-paper);border:1px solid var(--moex-brass-dim);color:var(--moex-bone);
+  box-shadow:0 6px 18px rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .3s, transform .3s, visibility 0s linear .3s, background .2s, border-color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.moex-totop.moex-show{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .3s, transform .3s, visibility 0s, background .2s, border-color .2s;
+}
+.moex-totop:hover,.moex-totop:focus-visible{background:rgba(122,14,14,.5);border-color:var(--moex-blood-bright);}
+.moex-totop svg{width:18px;height:18px;}
+
+
+/* ================================================
+   EXTRAS: scroll thread, reveal, lightbox, swipe
+   ================================================ */
+.moex-progress{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:9002;pointer-events:none;
+}
+.moex-progress i{
+  display:block;height:100%;width:100%;background:var(--moex-blood-bright);
+  transform:scaleX(0);transform-origin:left;box-shadow:0 0 10px rgba(196,24,24,.8);
+}
+/* reveal on scroll (only when JS is running) */
+.moex-js .moex-reveal{opacity:0;transition:opacity .7s ease var(--d,0s), translate .7s ease var(--d,0s), transform .25s ease, box-shadow .25s ease;}
+.moex-js .moex-pin.moex-reveal{translate:0 26px;}
+.moex-js .moex-reveal.moex-in{opacity:1;translate:0 0;}
+
+.moex-photo{-webkit-tap-highlight-color:transparent;}
+.moex-photo:focus-visible{outline:1px solid var(--moex-blood-bright);outline-offset:4px;}
+.moex-slider{touch-action:pan-y;}
+
+/* lightbox */
+.moex-lb{
+  position:fixed;inset:0;z-index:5200;background:rgba(5,3,2,.94);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:56px 14px 28px;touch-action:pan-y;
+}
+.moex-lb.moex-open{display:flex;animation:moexFadeTab .3s ease;}
+.moex-lb-frame{
+  background:var(--moex-bone);padding:10px 10px 14px;max-width:min(92vw,560px);
+  box-shadow:0 20px 60px rgba(0,0,0,.8);transform:rotate(-1.5deg);
+}
+.moex-lb-frame img{max-width:100%;max-height:62vh;object-fit:contain;display:block;margin:0 auto;filter:grayscale(.2) contrast(1.05);}
+.moex-lb-cap{
+  font-family:var(--moex-font-mono);font-size:.74rem;color:#1a1510;text-align:center;
+  margin-top:12px;letter-spacing:.03em;line-height:1.45;
+}
+.moex-lb-count{
+  margin-top:18px;font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.2em;color:var(--moex-brass);
+}
+.moex-lb-btn{
+  position:absolute;width:46px;height:46px;border-radius:50%;
+  background:rgba(10,8,6,.7);border:1px solid var(--moex-ash);color:var(--moex-bone);
+  font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.moex-lb-btn:hover,.moex-lb-btn:focus-visible{background:rgba(122,14,14,.5);border-color:var(--moex-blood-bright);}
+.moex-lb-close{top:max(10px,env(safe-area-inset-top,0px));right:12px;}
+.moex-lb-prev{left:8px;top:50%;margin-top:-23px;}
+.moex-lb-next{right:8px;top:50%;margin-top:-23px;}
+@media(max-width:520px){
+  .moex-lb-prev,.moex-lb-next{top:auto;bottom:max(22px,env(safe-area-inset-bottom,0px));margin-top:0;}
+  .moex-lb-prev{left:18%;}
+  .moex-lb-next{right:18%;}
+  .moex-lb-count{margin-bottom:56px;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -701,19 +916,27 @@ input[type=range]::-moz-range-thumb{
 
 <div class="moex-grain"></div>
 <div class="moex-scanlines"></div>
+<div class="moex-progress" aria-hidden="true"><i id="moexProgressFill"></i></div>
 <div class="moex-cursor" id="moexCursor"><div class="moex-ring"></div></div>
 
 <!-- NAV -->
-<nav class="moex-nav">
-  <div class="moex-nav-inner">
+<nav class="moex-nav" aria-label="Main">
+  <div class="moex-topbar">
+    <a class="moex-brand" href="#moex-hero">Makarov</a>
+    <button class="moex-burger" id="moexBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="moexDrawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="moex-nav-inner" id="moexDrawer">
     <a href="#moex-dossier" data-moex-tab>DOSSIER</a>
     <a href="#moex-wall" data-moex-tab>EVIDENCE</a>
     <a href="#moex-gallery" data-moex-tab>GALLERY</a>
     <a href="#moex-playlist" data-moex-tab>PLAYLIST</a>
     <a href="#moex-letters" data-moex-tab>LETTERS</a>
-    <a href="#moex-compat" data-moex-tab>US</a>
+    <a href="#moex-timeline" data-moex-tab>TIMELINE</a>
   </div>
 </nav>
+<div class="moex-scrim" id="moexScrim"></div>
 
 <!-- HERO -->
 <header class="moex-hero" id="moex-hero">
@@ -792,19 +1015,22 @@ input[type=range]::-moz-range-thumb{
 <section class="moex-section" id="moex-wall">
   <div class="moex-tag">Corkboard, Recovered From The Study</div>
   <h2 class="moex-h2">The Evidence Wall</h2>
-  <p style="font-family:var(--moex-font-body);color:var(--moex-bone-dim);font-size:1.15rem;margin:-14px 0 34px;">Everything I've collected of him. Click a pin.</p>
+  <p style="font-family:var(--moex-font-body);color:var(--moex-bone-dim);font-size:1.15rem;margin:-14px 0 34px;">Everything I've collected of him. Tap a pin.</p>
+
+  <div class="moex-wall-progress" id="moexWallProgress" aria-live="polite">
+    <span id="moexWallProgressText">EXAMINED 0 / 6</span>
+    <div class="moex-wall-progress-bar"><i id="moexWallProgressFill"></i></div>
+  </div>
 
   <div class="moex-wall" id="moexWall">
     <svg class="moex-strings" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path d="M 12 10 L 41 14" />
-      <path d="M 41 14 L 70 8" />
-      <path d="M 18 46 L 48 50" />
-      <path d="M 48 50 L 77 44" />
-      <path d="M 30 82 L 60 78" />
-      <path d="M 12 10 L 18 46" />
-      <path d="M 70 8 L 77 44" />
-      <path d="M 48 50 L 60 78" />
-      <path d="M 18 46 L 30 82" />
+      <path d="M 14 8 L 44 12" />
+      <path d="M 44 12 L 73 6" />
+      <path d="M 21 58 L 51 62" />
+      <path d="M 51 62 L 80 56" />
+      <path d="M 14 8 L 21 58" />
+      <path d="M 44 12 L 51 62" />
+      <path d="M 73 6 L 80 56" />
     </svg>
 
     <button class="moex-pin p1" data-note="A coat, left on the back of a chair for three days because he swore he'd be back before it got cold. It didn't. He wasn't. I wore it instead.">
@@ -827,22 +1053,14 @@ input[type=range]::-moz-range-thumb{
       <div class="moex-pin-cap">THE TAG</div>
     </button>
 
-    <button class="moex-pin p5" data-note="A photograph, the only one that exists of us together. He doesn't like cameras. He let this one happen anyway.">
-      <div class="moex-pin-art"><svg viewBox="0 0 64 64" fill="none" stroke="#2a221b" stroke-width="2"><rect x="8" y="12" width="48" height="38"/><circle cx="32" cy="31" r="9"/><rect x="24" y="6" width="10" height="6"/></svg></div>
-      <div class="moex-pin-cap">THE PHOTOGRAPH</div>
-    </button>
 
-    <button class="moex-pin p6" data-note="A compass that doesn't point north anymore — he broke it on purpose, he says, so it would only ever point toward home.">
+    <button class="moex-pin p5" data-note="A compass that doesn't point north anymore — he broke it on purpose, he says, so it would only ever point toward home.">
       <div class="moex-pin-art"><svg viewBox="0 0 64 64" fill="none" stroke="#2a221b" stroke-width="2"><circle cx="32" cy="32" r="20"/><path d="M32 18 L36 32 L32 46 L28 32 Z" fill="#8a1a1a" stroke="none"/></svg></div>
       <div class="moex-pin-cap">THE COMPASS</div>
     </button>
 
-    <button class="moex-pin p7" data-note="A single wolf-track sketch, drawn in the margin of a letter, next to a much smaller rabbit print. He never explained it. He didn't need to.">
-      <div class="moex-pin-art"><svg viewBox="0 0 64 64" fill="none" stroke="#2a221b" stroke-width="2"><ellipse cx="24" cy="40" rx="12" ry="8"/><ellipse cx="46" cy="24" rx="6" ry="4"/></svg></div>
-      <div class="moex-pin-cap">TWO SETS OF TRACKS</div>
-    </button>
 
-    <button class="moex-pin p8" data-note="A wax seal, unused, engraved with both our initials. He commissioned it the same week he proposed. Old money habits, he called it. I called it romantic.">
+    <button class="moex-pin p6" data-note="A wax seal, unused, engraved with both our initials. He commissioned it the same week he proposed. Old money habits, he called it. I called it romantic.">
       <div class="moex-pin-art"><svg viewBox="0 0 64 64" fill="none" stroke="#2a221b" stroke-width="2"><circle cx="32" cy="32" r="18"/><text x="32" y="38" font-size="16" text-anchor="middle" fill="#2a221b" stroke="none" font-family="Georgia, serif">V+A</text></svg></div>
       <div class="moex-pin-cap">THE SEAL</div>
     </button>
@@ -969,25 +1187,76 @@ input[type=range]::-moz-range-thumb{
   </div>
 </section>
 
-<!-- COMPATIBILITY -->
-<section class="moex-section" id="moex-compat">
-  <div class="moex-tag">Cross-Reference</div>
-  <h2 class="moex-h2">Wolf &amp; Bunny, By the Numbers</h2>
-  <div class="moex-compat">
-    <div class="moex-compat-panels">
-      <div class="moex-compat-wolf">
-        <h4>HIM</h4>
-        <ul><li>Control</li><li>Iron discipline</li><li>Silence as a weapon</li><li>Trusts almost no one</li><li>Storms, quiet ones</li></ul>
-      </div>
-      <div class="moex-compat-bunny">
-        <h4>ME</h4>
-        <ul><li>Trust, given too easily</li><li>Soft chaos</li><li>Talks enough for two</li><li>Believes almost everyone</li><li>Sunlight, stubborn</li></ul>
-      </div>
-      <div class="moex-compat-center">🐺✦🐇</div>
+<!-- TIMELINE -->
+<section class="moex-section" id="moex-timeline">
+  <div class="moex-tag">Chronology</div>
+  <h2 class="moex-h2">The Case Timeline</h2>
+  <p style="font-family:var(--moex-font-body);color:var(--moex-bone-dim);font-size:1.15rem;margin:-14px 0 34px;">How the file got opened. Tap an entry to read it.</p>
+  <div class="moex-timeline" id="moexTimeline">
+    <div class="moex-tl-item">
+      <details class="moex-tl-card">
+        <summary>
+          <span class="moex-tl-text">
+            <span class="moex-tl-meta">Phase 01 · Nov 2019</span>
+            <span class="moex-tl-title">File Opened</span>
+            <span class="moex-tl-line">I wasn't supposed to notice him. Nobody is. That is rather the point of him.</span>
+          </span>
+          <span class="moex-tl-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="moex-tl-detail"><p>He noticed me noticing. He said nothing, which I now know is how he says almost everything.</p></div>
+      </details>
     </div>
-    <div class="moex-compat-slider-row">
-      <input type="range" id="moexCompatSlider" min="0" max="100" value="50">
-      <div class="moex-compat-readout" id="moexCompatReadout">perfectly, dangerously balanced</div>
+    <div class="moex-tl-item">
+      <details class="moex-tl-card">
+        <summary>
+          <span class="moex-tl-text">
+            <span class="moex-tl-meta">Phase 02 · Date Redacted</span>
+            <span class="moex-tl-title">Proximity</span>
+            <span class="moex-tl-line">Somewhere between the third letter and the fourth, the wolf stopped watching the exits.</span>
+          </span>
+          <span class="moex-tl-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="moex-tl-detail"><p>The tea, the quiet, the way he started leaving the door unlatched. None of it was ever announced. All of it was noted.</p></div>
+      </details>
+    </div>
+    <div class="moex-tl-item">
+      <details class="moex-tl-card">
+        <summary>
+          <span class="moex-tl-text">
+            <span class="moex-tl-meta">Phase 03 · Date Redacted</span>
+            <span class="moex-tl-title">The Six Months</span>
+            <span class="moex-tl-line">He left. The coat stayed. So did I.</span>
+          </span>
+          <span class="moex-tl-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="moex-tl-detail"><p>He gave me the dog tag the week he went. I kept it under my collar and counted days like they were rounds in a magazine.</p></div>
+      </details>
+    </div>
+    <div class="moex-tl-item">
+      <details class="moex-tl-card">
+        <summary>
+          <span class="moex-tl-text">
+            <span class="moex-tl-meta">Phase 04 · Date Redacted</span>
+            <span class="moex-tl-title">Two Rings, One Box</span>
+            <span class="moex-tl-line">Steel and gold. Both kinds of promise, he said.</span>
+          </span>
+          <span class="moex-tl-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="moex-tl-detail"><p>He asked the way he does everything: prepared, precise, and quietly terrified of the answer. I said yes before he finished the sentence.</p></div>
+      </details>
+    </div>
+    <div class="moex-tl-item moex-tl-now">
+      <details class="moex-tl-card">
+        <summary>
+          <span class="moex-tl-text">
+            <span class="moex-tl-meta">Phase 05 · Ongoing</span>
+            <span class="moex-tl-title">File Still Open</span>
+            <span class="moex-tl-line">No closing date. No intention of setting one.</span>
+          </span>
+          <span class="moex-tl-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="moex-tl-detail"><p>Some dossiers get archived. This one gets added to, every single day.</p></div>
+      </details>
     </div>
   </div>
 </section>
@@ -1000,7 +1269,9 @@ input[type=range]::-moz-range-thumb{
   <div class="moex-footer-mono" id="moexAnniversary">DAYS ON FILE TOGETHER: —</div>
 </footer>
 
-<button class="moex-mute-btn" id="moexMuteBtn" title="toggle ambient sound">🔈</button>
+<button class="moex-totop" id="moexToTop" type="button" aria-label="Back to top" title="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <!-- LETTER MODAL -->
 <div class="moex-modal-overlay" id="moexModalOverlay">
@@ -1017,6 +1288,18 @@ input[type=range]::-moz-range-thumb{
 </div>
 
 <!-- EASTER EGG OVERLAY -->
+<!-- PHOTO LIGHTBOX -->
+<div class="moex-lb" id="moexLb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="moex-lb-btn moex-lb-close" id="moexLbClose" aria-label="Close photo">✕</button>
+  <button class="moex-lb-btn moex-lb-prev" id="moexLbPrev" aria-label="Previous photo">◄</button>
+  <button class="moex-lb-btn moex-lb-next" id="moexLbNext" aria-label="Next photo">►</button>
+  <div class="moex-lb-frame">
+    <img id="moexLbImg" src="" alt="">
+    <div class="moex-lb-cap" id="moexLbCap"></div>
+  </div>
+  <div class="moex-lb-count" id="moexLbCount"></div>
+</div>
+
 <div class="moex-egg-overlay" id="moexEggOverlay">
   <h2>TRANSMISSION DECRYPTED</h2>
   <p>"You found the code before you found me. Somehow that feels about right — you were always going to get through my defenses eventually, зайка. Every wolf has exactly one weakness. Congratulations, you're standing in it." — M.</p>
@@ -1026,6 +1309,7 @@ input[type=range]::-moz-range-thumb{
 <script>
 (function(){
   "use strict";
+  document.body.classList.add('moex-js');
 
   /* ---------- custom cursor ---------- */
   var isFine = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
@@ -1116,13 +1400,33 @@ input[type=range]::-moz-range-thumb{
     });
   });
 
-  /* ---------- imported from brown: evidence wall pin notes ---------- */
+  /* ---------- evidence wall: pin notes + examined counter ---------- */
   var moexNoteBox = document.getElementById('moexNote');
-  document.querySelectorAll('.moex-pin').forEach(function(pin){
+  var wallPins = document.querySelectorAll('.moex-pin');
+  var wallText = document.getElementById('moexWallProgressText');
+  var wallFill = document.getElementById('moexWallProgressFill');
+  var wallBox = document.getElementById('moexWallProgress');
+  var seenCount = 0;
+  wallPins.forEach(function(pin){
     pin.addEventListener('click', function(){
+      wallPins.forEach(function(p){ p.classList.remove('moex-active-pin'); });
+      pin.classList.add('moex-active-pin');
+      moexNoteBox.classList.remove('moex-active');
+      void moexNoteBox.offsetWidth; /* restart fade animation */
       moexNoteBox.textContent = pin.getAttribute('data-note');
       moexNoteBox.classList.add('moex-active');
       moexNoteBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if(!pin.classList.contains('moex-seen')){
+        pin.classList.add('moex-seen');
+        seenCount++;
+        wallFill.style.transform = 'scaleX(' + (seenCount / wallPins.length) + ')';
+        if(seenCount === wallPins.length){
+          wallText.textContent = 'FILE COMPLETE — ALL ' + wallPins.length + ' EXAMINED';
+          wallBox.classList.add('moex-done');
+        } else {
+          wallText.textContent = 'EXAMINED ' + seenCount + ' / ' + wallPins.length;
+        }
+      }
     });
   });
 
@@ -1165,6 +1469,14 @@ input[type=range]::-moz-range-thumb{
   window.addEventListener('load', drawStrings);
   window.addEventListener('resize', drawStrings);
   setTimeout(drawStrings, 300);
+  window.addEventListener('orientationchange', function(){ setTimeout(drawStrings, 250); });
+  if('ResizeObserver' in window){
+    var strRo = new ResizeObserver(function(){ drawStrings(); });
+    strRo.observe(document.getElementById('moexCorkboard'));
+  }
+  document.querySelectorAll('#moexCorkboard img').forEach(function(im){
+    if(!im.complete) im.addEventListener('load', drawStrings);
+  });
 
   /* ---------- media slider ---------- */
   (function(){
@@ -1189,6 +1501,18 @@ input[type=range]::-moz-range-thumb{
         d.classList.toggle('moex-active', di === idx);
       });
     }
+
+    /* swipe support for touch screens */
+    var sx = 0, sy = 0;
+    var sliderEl = document.getElementById('moexSlider');
+    sliderEl.addEventListener('touchstart', function(e){
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    }, {passive:true});
+    sliderEl.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4){ goTo(dx < 0 ? idx + 1 : idx - 1); }
+    }, {passive:true});
 
     document.getElementById('moexSliderNext').addEventListener('click', function(){ goTo(idx + 1); });
     document.getElementById('moexSliderPrev').addEventListener('click', function(){ goTo(idx - 1); });
@@ -1313,12 +1637,6 @@ input[type=range]::-moz-range-thumb{
     document.getElementById('moexTimeCur').textContent = fmtTime(curSeconds);
     document.getElementById('moexProgressFill').style.width = (pct*100)+'%';
   });
-  document.getElementById('moexMuteBtn').addEventListener('click', function(){
-    muted = !muted;
-    this.textContent = muted ? '🔇' : '🔈';
-    updateAmbient();
-  });
-
   /* ---------- letters modal ---------- */
   var letters = [
     {title:"For the nights he's late", body:"I keep the light on longer than I should. Everyone else in this city locks their doors and prays he stays far away. I leave mine unlocked and pray he doesn't stay away too long. They'd call me foolish for that. I call it faith. He always comes home. He is simply, endlessly, incapable of staying anywhere I am not."},
@@ -1340,26 +1658,6 @@ input[type=range]::-moz-range-thumb{
   overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.classList.remove('moex-open'); });
   document.getElementById('moexModalNext').addEventListener('click', function(){ openLetter((curLetter+1)%letters.length); });
   document.getElementById('moexModalPrev').addEventListener('click', function(){ openLetter((curLetter-1+letters.length)%letters.length); });
-
-  /* ---------- compatibility slider ---------- */
-  var compatSlider = document.getElementById('moexCompatSlider');
-  var compatReadout = document.getElementById('moexCompatReadout');
-  var wolfPanel = document.querySelector('.moex-compat-wolf');
-  var bunnyPanel = document.querySelector('.moex-compat-bunny');
-  function updateCompat(){
-    var v = parseInt(compatSlider.value,10);
-    wolfPanel.style.opacity = 0.55 + (100-v)/100*0.45;
-    bunnyPanel.style.opacity = 0.55 + v/100*0.45;
-    var msg;
-    if(v < 20) msg = "mostly wolf tonight";
-    else if(v < 45) msg = "leaning wolf, softening at the edges";
-    else if(v <= 55) msg = "perfectly, dangerously balanced";
-    else if(v < 80) msg = "leaning bunny, and he lets her";
-    else msg = "mostly bunny tonight — and he's letting it happen";
-    compatReadout.textContent = msg;
-  }
-  compatSlider.addEventListener('input', updateCompat);
-  updateCompat();
 
   /* ---------- anniversary counter ---------- */
   var annivDate = new Date("2019-11-07T00:00:00");
@@ -1415,6 +1713,151 @@ input[type=range]::-moz-range-thumb{
   document.getElementById('moexEggClose').addEventListener('click', function(){
     document.getElementById('moexEggOverlay').classList.remove('moex-open');
   });
+
+  /* ---------- mobile menu (slide-in drawer) ---------- */
+  (function(){
+    var burger = document.getElementById('moexBurger');
+    var scrim = document.getElementById('moexScrim');
+    var drawer = document.getElementById('moexDrawer');
+    function setMenu(open){
+      document.body.classList.toggle('moex-menu-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    burger.addEventListener('click', function(){
+      setMenu(!document.body.classList.contains('moex-menu-open'));
+    });
+    scrim.addEventListener('click', function(){ setMenu(false); });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setMenu(false); });
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') setMenu(false);
+    });
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 860) setMenu(false);
+    });
+  })();
+
+  /* ---------- back to top ---------- */
+  (function(){
+    var btn = document.getElementById('moexToTop');
+    function check(){ btn.classList.toggle('moex-show', window.scrollY > 500); }
+    window.addEventListener('scroll', check, {passive:true});
+    check();
+    btn.addEventListener('click', function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+    });
+  })();
+
+  /* ---------- timeline reveal on scroll ---------- */
+  (function(){
+    var items = document.querySelectorAll('.moex-tl-item');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(it){ it.classList.add('moex-in'); });
+      return;
+    }
+    var tlIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('moex-in'); tlIo.unobserve(entry.target); }
+      });
+    }, {threshold:.15});
+    items.forEach(function(it){ tlIo.observe(it); });
+  })();
+
+  /* ---------- scroll thread progress bar ---------- */
+  (function(){
+    var fill = document.getElementById('moexProgressFill');
+    var ticking = false;
+    function update(){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      fill.style.transform = 'scaleX(' + p + ')';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(update); }
+    }, {passive:true});
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  /* ---------- staggered reveal for pins + photos ---------- */
+  (function(){
+    var els = document.querySelectorAll('.moex-pin, .moex-photo');
+    els.forEach(function(el, i){
+      el.classList.add('moex-reveal');
+      el.style.setProperty('--d', ((i % 4) * 0.09) + 's');
+    });
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('moex-in'); });
+      return;
+    }
+    var revIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('moex-in'); revIo.unobserve(entry.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){ revIo.observe(el); });
+  })();
+
+  /* ---------- corkboard photo lightbox (tap to enlarge, swipe to browse) ---------- */
+  (function(){
+    var photos = Array.prototype.slice.call(document.querySelectorAll('#moexCorkboard .moex-photo'));
+    var lb = document.getElementById('moexLb');
+    var lbImg = document.getElementById('moexLbImg');
+    var lbCap = document.getElementById('moexLbCap');
+    var lbCount = document.getElementById('moexLbCount');
+    var cur = 0, lastFocus = null;
+
+    function show(i){
+      cur = (i + photos.length) % photos.length;
+      var p = photos[cur];
+      var im = p.querySelector('img');
+      lbImg.src = im.getAttribute('src');
+      lbImg.alt = im.getAttribute('alt') || '';
+      lbCap.textContent = p.querySelector('.moex-photo-caption').textContent;
+      lbCount.textContent = (cur + 1) + ' / ' + photos.length;
+    }
+    function open(i){
+      lastFocus = document.activeElement;
+      show(i);
+      lb.classList.add('moex-open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('moexLbClose').focus();
+    }
+    function close(){
+      lb.classList.remove('moex-open');
+      document.body.style.overflow = '';
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    photos.forEach(function(p, i){
+      p.setAttribute('tabindex', '0');
+      p.setAttribute('role', 'button');
+      p.setAttribute('aria-label', 'View photo ' + (i + 1));
+      p.addEventListener('click', function(){ open(i); });
+      p.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(i); }
+      });
+    });
+    document.getElementById('moexLbClose').addEventListener('click', close);
+    document.getElementById('moexLbPrev').addEventListener('click', function(){ show(cur - 1); });
+    document.getElementById('moexLbNext').addEventListener('click', function(){ show(cur + 1); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+    document.addEventListener('keydown', function(e){
+      if(!lb.classList.contains('moex-open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowLeft') show(cur - 1);
+      if(e.key === 'ArrowRight') show(cur + 1);
+    });
+    var tx = 0, ty = 0;
+    lb.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+    lb.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+      if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4){ show(dx < 0 ? cur + 1 : cur - 1); }
+    }, {passive:true});
+  })();
 
 })();
 </script>
