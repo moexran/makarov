@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0806">
+<meta property="og:title" content="МАКАРОВ — Personal File">
+<meta property="og:description" content="A classified personal dossier. Filed by Angel.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0806'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23c41818' stroke-width='4'/%3E%3Cpath d='M32 6v52M6 32h52' stroke='%23c41818' stroke-width='4'/%3E%3C/svg%3E">
+<script>try{if(sessionStorage.getItem("moexBooted")==="1")document.documentElement.className+=" moex-seen-boot"}catch(e){}</script>
 <title>МАКАРОВ — Personal File // filed by A.</title>
 <meta name="description" content="A classified personal dossier. Filed by Angel.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Black+Ops+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Black+Ops+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 /* ================================================
    MOEX — root tokens
@@ -349,10 +355,9 @@ button{font-family:inherit;}
 .moex-file{
   border:1px solid var(--moex-ash);
   background:linear-gradient(180deg,rgba(28,21,13,.7),rgba(10,8,6,.5));
-  padding:48px 0 12px;position:relative;
+  padding:34px;position:relative;
 }
-.moex-file-body{padding:0 34px 18px;--moex-maxh:min(52vh,360px);}
-@media(max-width:520px){.moex-file-body{padding:0 18px 18px;}}
+@media(max-width:520px){.moex-file{padding:26px 18px;}}
 .moex-file::before{
   content:attr(data-stamp);position:absolute;top:14px;right:18px;
   font-family:var(--moex-font-mono);font-size:.68rem;color:var(--moex-blood-bright);
@@ -599,7 +604,6 @@ button{font-family:inherit;}
   background:none;border:none;color:var(--moex-bone-dim);cursor:pointer;
   transition:color .2s, transform .2s;
 }
-.moex-controls button:hover{color:var(--moex-bone);}
 .moex-btn-play{
   width:52px;height:52px;border-radius:50%;background:var(--moex-blood-bright)!important;
   display:flex;align-items:center;justify-content:center;color:var(--moex-void)!important;
@@ -607,19 +611,6 @@ button{font-family:inherit;}
 }
 .moex-btn-play:hover{transform:scale(1.08);}
 .moex-toggle-active{color:var(--moex-blood-bright)!important;}
-
-.moex-volume-row{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:14px;}
-.moex-volume-row input[type=range]{width:100px;}
-input[type=range]{
-  -webkit-appearance:none;appearance:none;height:3px;background:var(--moex-ash);outline:none;cursor:pointer;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--moex-blood-bright);
-  box-shadow:0 0 8px rgba(196,24,24,.7);
-}
-input[type=range]::-moz-range-thumb{
-  width:12px;height:12px;border-radius:50%;background:var(--moex-blood-bright);border:none;
-}
 
 .moex-tracklist{margin-top:10px;border-top:1px solid var(--moex-ash);}
 .moex-track{
@@ -689,108 +680,6 @@ input[type=range]::-moz-range-thumb{
 .moex-modal-nav button:hover{background:#5c4b32;color:#efe6d3;}
 
 /* ================================================
-   INTERCEPTED TRANSMISSIONS (chat)
-   ================================================ */
-.moex-section-intro{font-family:var(--moex-font-body);color:var(--moex-bone-dim);font-size:1.15rem;margin:-14px 0 30px;max-width:620px;}
-.moex-comms{max-width:520px;margin:0 auto;}
-.moex-comms-tabs{display:flex;gap:8px;margin-bottom:16px;}
-.moex-comms-tab{
-  flex:1 1 0;min-width:0;min-height:48px;padding:8px 6px;
-  background:transparent;border:1px solid var(--moex-ash);color:var(--moex-bone-dim);
-  font-family:var(--moex-font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;line-height:1.3;
-  cursor:pointer;transition:border-color .2s,background .2s,color .2s;-webkit-tap-highlight-color:transparent;
-}
-.moex-comms-tab:hover{border-color:var(--moex-blood-bright);color:var(--moex-bone);}
-.moex-comms-tab.moex-active{background:rgba(122,14,14,.28);border-color:var(--moex-blood-bright);color:var(--moex-bone);}
-
-.moex-phone{
-  border:1px solid var(--moex-ash);
-  background:linear-gradient(180deg,rgba(28,21,13,.7),rgba(10,8,6,.6));
-  box-shadow:0 20px 50px rgba(0,0,0,.45);
-}
-.moex-phone-head{
-  display:flex;justify-content:space-between;align-items:center;gap:12px;
-  padding:13px 16px;border-bottom:1px solid var(--moex-ash);
-  font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.16em;color:var(--moex-brass);
-}
-.moex-phone-status{display:flex;align-items:center;gap:8px;color:var(--moex-bone-dim);}
-.moex-phone-status i{
-  width:7px;height:7px;border-radius:50%;background:var(--moex-blood-bright);
-  box-shadow:0 0 8px rgba(196,24,24,.9);animation:moex-blink 1.6s step-end infinite;
-}
-.moex-chat{
-  height:min(56vh,420px);min-height:300px;overflow-y:auto;overscroll-behavior:contain;
-  padding:18px 14px;display:flex;flex-direction:column;gap:10px;
-}
-.moex-chat:focus-visible{outline:1px solid var(--moex-brass);outline-offset:-4px;}
-.moex-chat-empty{
-  margin:auto;text-align:center;max-width:260px;
-  font-family:var(--moex-font-mono);font-size:.7rem;letter-spacing:.12em;line-height:1.7;color:var(--moex-ash);
-}
-.moex-msg{
-  max-width:84%;padding:10px 14px 8px;font-size:1.1rem;line-height:1.4;color:var(--moex-bone);
-  overflow-wrap:anywhere;animation:moexFadeTab .35s ease;
-}
-.moex-msg small{
-  display:block;margin-top:5px;font-family:var(--moex-font-mono);font-size:.58rem;letter-spacing:.12em;
-  color:var(--moex-bone-dim);opacity:.7;
-}
-.moex-msg-m{align-self:flex-start;background:rgba(10,8,6,.85);border:1px solid var(--moex-brass-dim);border-radius:2px 14px 14px 14px;}
-.moex-msg-a{align-self:flex-end;background:rgba(122,14,14,.3);border:1px solid var(--moex-blood);border-radius:14px 2px 14px 14px;}
-.moex-msg-a small{text-align:right;}
-.moex-typing{
-  display:flex;gap:5px;padding:14px 16px;border:1px solid var(--moex-ash);border-radius:14px;
-}
-.moex-typing.moex-msg-m{align-self:flex-start;}
-.moex-typing.moex-msg-a{align-self:flex-end;}
-.moex-typing span{width:6px;height:6px;border-radius:50%;background:var(--moex-brass);animation:moex-dot 1s ease-in-out infinite;}
-.moex-typing span:nth-child(2){animation-delay:.15s;}
-.moex-typing span:nth-child(3){animation-delay:.3s;}
-@keyframes moex-dot{0%,60%,100%{opacity:.25;transform:none;}30%{opacity:1;transform:translateY(-3px);}}
-.moex-chat-end{
-  align-self:center;margin-top:8px;padding:6px 14px;
-  font-family:var(--moex-font-stencil);font-size:.78rem;letter-spacing:.1em;color:var(--moex-blood-bright);
-  border:2px solid var(--moex-blood-bright);transform:rotate(-3deg);opacity:.85;
-}
-.moex-phone-foot{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:12px 14px;border-top:1px solid var(--moex-ash);
-}
-.moex-comms-count{font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.16em;color:var(--moex-brass);}
-.moex-phone-foot .moex-quiz-btn{flex:0 1 auto;}
-.moex-phone-foot .moex-quiz-btn:disabled{opacity:.45;cursor:default;}
-@media(max-width:520px){
-  .moex-comms-tab{font-size:.6rem;letter-spacing:.04em;}
-  .moex-chat{padding:16px 12px;}
-  .moex-msg{max-width:90%;font-size:1.05rem;}
-}
-
-/* ================================================
-   SCROLLABLE DESCRIPTION BOXES
-   long text scrolls inside the box instead of stretching it
-   ================================================ */
-.moex-scroll{
-  max-height:var(--moex-maxh,320px);overflow-y:auto;overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:thin;scrollbar-color:var(--moex-brass-dim) transparent;
-}
-.moex-scroll::-webkit-scrollbar{width:6px;}
-.moex-scroll::-webkit-scrollbar-thumb{background:var(--moex-brass-dim);border-radius:3px;}
-.moex-scroll::-webkit-scrollbar-track{background:transparent;}
-.moex-scroll:focus-visible{outline:1px solid var(--moex-brass);outline-offset:-3px;}
-/* fade at the bottom while there is more to read (class toggled by JS) */
-.moex-scroll.moex-more{
-  -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - var(--moex-fade,32px)),transparent);
-  mask-image:linear-gradient(to bottom,#000 calc(100% - var(--moex-fade,32px)),transparent);
-}
-.moex-stampcard{--moex-maxh:min(70vh,440px);}
-.moex-note{--moex-maxh:min(34vh,200px);}
-.moex-photo-caption,.moex-slide-caption{--moex-maxh:4.2em;--moex-fade:12px;}
-.moex-lb-cap{--moex-maxh:4.6em;--moex-fade:12px;}
-.moex-modal p#moexModalBody{--moex-maxh:min(46vh,320px);}
-.moex-egg-overlay p{--moex-maxh:40vh;}
-
-/* ================================================
    FOOTER
    ================================================ */
 .moex-footer{
@@ -822,6 +711,7 @@ input[type=range]::-moz-range-thumb{
 }
 .moex-heart-particle{position:fixed;z-index:5001;pointer-events:none;color:var(--moex-blood-bright);font-size:1.2rem;}
 
+/* utility */
 .moex-totop{
   position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom, 0px));z-index:400;
   width:46px;height:46px;padding:0;border-radius:50%;cursor:pointer;
@@ -960,6 +850,153 @@ input[type=range]::-moz-range-thumb{
   .moex-lb-count{margin-bottom:56px;}
 }
 
+/* dossier text: scrolls instead of stretching the card */
+.moex-file-scroll{
+  max-height:min(340px,60vh);overflow-y:auto;overscroll-behavior:contain;padding-right:12px;
+  scrollbar-width:thin;scrollbar-color:var(--moex-blood) transparent;
+}
+.moex-file-scroll::-webkit-scrollbar{width:5px;}
+.moex-file-scroll::-webkit-scrollbar-track{background:rgba(77,70,60,.25);}
+.moex-file-scroll::-webkit-scrollbar-thumb{background:var(--moex-blood);}
+.moex-file-scroll:focus-visible{outline:1px solid var(--moex-brass-dim);outline-offset:4px;}
+.moex-quiz-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+
+/* ================================================
+   WRITING / FANFICS
+   ================================================ */
+.moex-section-intro{font-family:var(--moex-font-body);color:var(--moex-bone-dim);font-size:1.15rem;margin:-14px 0 34px;}
+.moex-fics{display:grid;gap:26px;max-width:960px;margin:0 auto;}
+.moex-fic{
+  border:1px solid var(--moex-ash);min-width:0;padding:28px;position:relative;
+  background:linear-gradient(180deg,rgba(28,21,13,.7),rgba(10,8,6,.5));
+  transition:border-color .25s;
+}
+.moex-fic:hover,.moex-fic:focus-within{border-color:var(--moex-brass-dim);}
+.moex-fic-feature{display:grid;grid-template-columns:220px minmax(0,1fr);gap:30px;align-items:start;}
+.moex-fic-cover{
+  aspect-ratio:2/3;background:var(--moex-paper-2);border:1px solid var(--moex-ash);
+  box-shadow:0 14px 30px rgba(0,0,0,.6);overflow:hidden;
+}
+.moex-fic-cover img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05);}
+.moex-fic-body{display:flex;flex-direction:column;min-width:0;height:100%;}
+.moex-fic-no{font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.24em;color:var(--moex-blood-bright);}
+.moex-fic-title{
+  font-family:var(--moex-font-display);font-weight:700;font-size:clamp(1.4rem,3.6vw,2rem);
+  line-height:1.2;margin:6px 0 14px;color:var(--moex-bone);overflow-wrap:anywhere;
+}
+.moex-fic-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0;list-style:none;}
+.moex-fic-tags li{
+  font-family:var(--moex-font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--moex-brass);border:1px solid var(--moex-ash);padding:4px 9px;
+}
+.moex-fic-desc{
+  max-height:190px;overflow-y:auto;overscroll-behavior:contain;margin:0 0 20px;padding-right:12px;
+  font-size:1.08rem;line-height:1.65;color:var(--moex-bone-dim);overflow-wrap:anywhere;
+  scrollbar-width:thin;scrollbar-color:var(--moex-blood) transparent;
+}
+.moex-fic-desc p{margin:0 0 12px;}
+.moex-fic-desc p:last-child{margin-bottom:0;}
+.moex-fic-desc::-webkit-scrollbar{width:5px;}
+.moex-fic-desc::-webkit-scrollbar-track{background:rgba(77,70,60,.25);}
+.moex-fic-desc::-webkit-scrollbar-thumb{background:var(--moex-blood);}
+.moex-fic-desc:focus-visible{outline:1px solid var(--moex-brass-dim);outline-offset:4px;}
+.moex-fic-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;}
+.moex-fic-btn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;
+  border:1px solid var(--moex-brass);color:var(--moex-brass);text-align:center;
+  font-family:var(--moex-font-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  transition:background .2s,border-color .2s,color .2s;-webkit-tap-highlight-color:transparent;
+}
+.moex-fic-btn:hover,.moex-fic-btn:focus-visible{background:rgba(122,14,14,.35);border-color:var(--moex-blood-bright);color:var(--moex-bone);}
+/* links you haven't filled in yet stay dimmed and inert */
+.moex-fic-btn[href="#"]{opacity:.45;pointer-events:none;}
+.moex-fic-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;}
+.moex-fic-row .moex-fic{display:flex;flex-direction:column;}
+.moex-fic-row .moex-fic-desc{max-height:170px;}
+@media(max-width:820px){.moex-fic-row{grid-template-columns:1fr;}}
+@media(max-width:620px){
+  .moex-fic{padding:20px 16px;}
+  .moex-fic-feature{grid-template-columns:1fr;gap:22px;}
+  .moex-fic-cover{width:min(62%,220px);margin:0 auto;}
+  .moex-fic-desc{max-height:160px;}
+  .moex-fic-btn{flex:1 1 auto;}
+}
+
+/* ================================================
+   NEW: glitch title, boot screen, stamp slam, polish
+   ================================================ */
+.moex-hero h1.moex-glitch{position:relative;animation:moex-gl-shake 5s steps(1) infinite;}
+.moex-glitch::before,.moex-glitch::after{
+  content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;
+  text-shadow:none;pointer-events:none;clip-path:inset(0 0 100% 0);
+}
+.moex-glitch::before{color:var(--moex-blood-bright);animation:moex-gl-a 5s steps(1) infinite;}
+.moex-glitch::after{color:#3fd8cf;mix-blend-mode:screen;animation:moex-gl-b 5s steps(1) infinite;}
+.moex-glitch.moex-burst{animation:moex-gl-shake 5s steps(1) -4.3s 1;}
+.moex-glitch.moex-burst::before{animation:moex-gl-a 5s steps(1) -4.3s 1;}
+.moex-glitch.moex-burst::after{animation:moex-gl-b 5s steps(1) -4.3s 1;}
+@keyframes moex-gl-a{
+  0%,86%,100%{clip-path:inset(0 0 100% 0);transform:none;}
+  88%{clip-path:inset(10% 0 62% 0);transform:translate(-7px,0);}
+  90%{clip-path:inset(54% 0 18% 0);transform:translate(8px,0);}
+  92%{clip-path:inset(30% 0 44% 0);transform:translate(-4px,0);}
+  94%{clip-path:inset(72% 0 6% 0);transform:translate(6px,0);}
+  96%{clip-path:inset(4% 0 80% 0);transform:translate(-9px,0);}
+  98%{clip-path:inset(46% 0 30% 0);transform:translate(3px,0);}
+}
+@keyframes moex-gl-b{
+  0%,87%,100%{clip-path:inset(0 0 100% 0);transform:none;}
+  89%{clip-path:inset(60% 0 12% 0);transform:translate(7px,0);}
+  91%{clip-path:inset(18% 0 56% 0);transform:translate(-8px,0);}
+  93%{clip-path:inset(80% 0 2% 0);transform:translate(5px,0);}
+  95%{clip-path:inset(36% 0 40% 0);transform:translate(-6px,0);}
+  97%{clip-path:inset(8% 0 70% 0);transform:translate(9px,0);}
+}
+@keyframes moex-gl-shake{
+  0%,87%,100%{transform:none;}
+  88%{transform:translate(3px,-1px) skewX(-3deg);}
+  91%{transform:translate(-3px,1px) skewX(2deg);}
+  94%{transform:translate(2px,0) skewX(-1deg);}
+  97%{transform:translate(-2px,1px);}
+}
+
+.moex-boot{
+  position:fixed;inset:0;z-index:8900;background:var(--moex-void);
+  display:flex;align-items:center;justify-content:center;padding:24px;cursor:pointer;
+  transition:opacity .5s, visibility 0s linear .5s;
+  animation:moex-boot-failsafe .4s 6s forwards;
+}
+.moex-boot.moex-boot-out{opacity:0;visibility:hidden;}
+.moex-seen-boot .moex-boot{display:none;}
+body.moex-booting{overflow:hidden;}
+.moex-boot-in{width:min(100%,380px);font-family:var(--moex-font-mono);text-align:center;}
+.moex-boot-line{font-size:.78rem;letter-spacing:.2em;color:var(--moex-brass);min-height:1.5em;margin-bottom:16px;}
+.moex-boot-bar{height:3px;background:var(--moex-ash);overflow:hidden;}
+.moex-boot-bar i{display:block;height:100%;background:var(--moex-blood-bright);box-shadow:0 0 10px rgba(196,24,24,.8);transform:scaleX(0);transform-origin:left;animation:moex-boot-bar 2.2s linear forwards;}
+.moex-boot-skip{margin-top:18px;font-size:.6rem;letter-spacing:.3em;color:var(--moex-ash);}
+@keyframes moex-boot-bar{to{transform:scaleX(1);}}
+@keyframes moex-boot-failsafe{to{opacity:0;visibility:hidden;pointer-events:none;}}
+
+.moex-js .moex-slam{opacity:0;scale:2.4;transition:opacity .2s ease, scale .38s cubic-bezier(.2,1.5,.4,1);}
+.moex-js .moex-slam.moex-in{opacity:var(--o,.8);scale:1;}
+.moex-stamp.moex-slam{--o:.75;}
+
+.moex-hint{
+  text-align:center;font-family:var(--moex-font-mono);font-size:.68rem;letter-spacing:.16em;
+  color:var(--moex-brass-dim);text-transform:uppercase;margin:-28px 0 38px;
+}
+.moex-swipe-hint{display:none;margin:-18px 0 22px;}
+@media(hover:none){.moex-swipe-hint{display:block;}}
+.moex-letters-wrap{row-gap:64px;}
+.moex-slide{cursor:zoom-in;-webkit-tap-highlight-color:transparent;}
+.moex-slide:focus-visible{outline:1px solid var(--moex-blood-bright);outline-offset:-4px;}
+
+@media (prefers-reduced-motion: reduce){
+  .moex-glitch::before,.moex-glitch::after{display:none;}
+  .moex-boot{display:none;}
+  .moex-js .moex-slam{opacity:var(--o,.8);scale:1;}
+}
+
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
   html{scroll-behavior:auto;}
@@ -969,6 +1006,7 @@ input[type=range]::-moz-range-thumb{
 
 <body>
 
+<div class="moex-boot" id="moexBoot" aria-hidden="true"><div class="moex-boot-in"><div class="moex-boot-line" id="moexBootLine">VERIFYING CLEARANCE...</div><div class="moex-boot-bar"><i></i></div><div class="moex-boot-skip">TAP TO SKIP</div></div></div>
 <div class="moex-grain"></div>
 <div class="moex-scanlines"></div>
 <div class="moex-progress" aria-hidden="true"><i id="moexScrollFill"></i></div>
@@ -984,11 +1022,11 @@ input[type=range]::-moz-range-thumb{
   </div>
   <div class="moex-nav-inner" id="moexDrawer">
     <a href="#moex-dossier" data-moex-tab>DOSSIER</a>
+    <a href="#moex-writing" data-moex-tab>WRITING</a>
     <a href="#moex-wall" data-moex-tab>EVIDENCE</a>
     <a href="#moex-gallery" data-moex-tab>GALLERY</a>
     <a href="#moex-playlist" data-moex-tab>PLAYLIST</a>
     <a href="#moex-letters" data-moex-tab>LETTERS</a>
-    <a href="#moex-comms" data-moex-tab>COMMS</a>
     <a href="#moex-quiz" data-moex-tab>CLEARANCE</a>
   </div>
 </nav>
@@ -998,7 +1036,7 @@ input[type=range]::-moz-range-thumb{
 <header class="moex-hero" id="moex-hero">
   <div class="moex-radar"><div class="moex-radar-sweep"></div></div>
   <div class="moex-eyebrow">Личное дело · Personal File · Restricted Access</div>
-  <h1>МАКАРО<span>В</span></h1>
+  <h1 class="moex-glitch" data-text="МАКАРОВ" aria-label="МАКАРОВ">МАКАРО<span>В</span></h1>
   <p class="moex-hero-sub">Ghost of the Konni. Architect of a war no one else could see coming. Mine, before he was ever theirs to fear.</p>
   <div class="moex-hero-file" id="moexTypewriter"></div>
   <div class="moex-scrolldown"><span></span>SCROLL</div>
@@ -1026,7 +1064,7 @@ input[type=range]::-moz-range-thumb{
   <h2 class="moex-h2">The Dossier</h2>
 
   <!-- stampcard, imported from the Brown template -->
-  <div class="moex-stampcard moex-scroll">
+  <div class="moex-stampcard">
     <div class="moex-stampcard-row"><span class="moex-stampcard-key">NAME</span><span>V. MAKAROV</span></div>
     <div class="moex-stampcard-row"><span class="moex-stampcard-key">ALIAS</span><span>Kingfish · First Horseman · Prisoner 627</span></div>
     <div class="moex-stampcard-row"><span class="moex-stampcard-key">AFFILIATION</span><span>Ultranationalist · Konni · Inner Circle</span></div>
@@ -1034,6 +1072,7 @@ input[type=range]::-moz-range-thumb{
     <div class="moex-stampcard-row"><span class="moex-stampcard-key">STATUS</span><span class="moex-redact" data-value="W.I.A. · Married" tabindex="0" role="button" aria-label="Reveal redacted field">███████████████</span></div>
     <div class="moex-stampcard-row"><span class="moex-stampcard-key">PARTNER</span><span class="moex-redact" data-value="Angelina Molkova Makarova" tabindex="0" role="button" aria-label="Reveal redacted field">████████████████████</span></div>
   </div>
+  <p class="moex-hint">▸ tap the black bars to declassify</p>
 
   <!-- tabbed dossier, imported from the Brown template -->
   <div class="moex-tabs" role="tablist" aria-label="Dossier sections">
@@ -1042,9 +1081,10 @@ input[type=range]::-moz-range-thumb{
     <button class="moex-tabbtn" data-tab="t3" role="tab" aria-selected="false">The Husband</button>
   </div>
 
+  <p class="moex-hint moex-swipe-hint">◄ swipe to switch files ►</p>
   <div class="moex-tabpanel moex-active" id="t1" role="tabpanel">
     <div class="moex-file" data-stamp="FILE 001 / POLITICAL">
-      <div class="moex-file-body moex-scroll">
+      <div class="moex-file-scroll" tabindex="0" role="region" aria-label="File text">
       <p>They write his name in the same paragraphs as words like <em>threat</em> and <em>architect</em>. He inherited a cause built on old grievances and made it his own — cold, patient, allergic to sentiment in every room except this one.</p>
       <p>The reports call him a symbol before they call him a man. I understand why. I also know it isn't the whole file.</p>
       <p>What he believes about his country is his to carry. What he does for it is not something I write love letters about. But the man who takes his boots off at our door is not the man in these reports — or he is, and he simply decided the war stops at the threshold.</p>
@@ -1054,7 +1094,7 @@ input[type=range]::-moz-range-thumb{
 
   <div class="moex-tabpanel" id="t2" role="tabpanel">
     <div class="moex-file" data-stamp="FILE 002 / OPERATIONAL">
-      <div class="moex-file-body moex-scroll">
+      <div class="moex-file-scroll" tabindex="0" role="region" aria-label="File text">
       <p>Konni-trained. Ghost-quiet. The kind of commander whose name alone ends arguments in rooms he isn't even in. People who've served under him describe him in two words, always the same two: <em>controlled</em>, and <em>terrifying</em>.</p>
       <p>He plans the way other men breathe — automatically, and three moves ahead. I've watched him rearrange an entire evening because one variable shifted, the same face he'd wear rerouting a convoy.</p>
       <p>He does not raise his voice. He has never needed to. <span class="moex-redact" data-value="the only time I've seen him lose composure was the week I went missing for six hours because my train was delayed." tabindex="0" role="button" aria-label="Reveal redacted field">████████████████████████████████████████████</span></p>
@@ -1064,11 +1104,70 @@ input[type=range]::-moz-range-thumb{
 
   <div class="moex-tabpanel" id="t3" role="tabpanel">
     <div class="moex-file" data-stamp="FILE 003 / UNCLASSIFIED">
-      <div class="moex-file-body moex-scroll">
+      <div class="moex-file-scroll" tabindex="0" role="region" aria-label="File text">
       <p>This is the file the reports don't have. He drinks his tea too hot on purpose. He reads my letters twice — once fast, to know I'm safe, once slow, to hear my voice in it. He is, quietly and without any apparent irony, soft with me in a way that would ruin his reputation if anyone ever saw it.</p>
       <p>People ask how a rabbit ends up married to a wolf. I never have a clever answer. Mostly I just say: he was gentle before he was anything else to me, and everyone else only ever got to meet him after.</p>
       <p>Case status, as far as I'm concerned: <span class="moex-redact" data-value="closed. happily. permanently." tabindex="0" role="button" aria-label="Reveal redacted field">████████████████████</span></p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="moex-section" id="moex-writing">
+  <div class="moex-tag">Works Of Fiction</div>
+  <h2 class="moex-h2">The Manuscripts</h2>
+  <p class="moex-section-intro">Everything I've written about him. Read at your own risk.</p>
+
+  <div class="moex-fics">
+    <!-- FIC 01: with cover. TODO: swap the cover src, title, tags, description and both links (href="#") -->
+    <article class="moex-fic moex-fic-feature">
+      <div class="moex-fic-cover"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='600'%3E%3Crect width='400' height='600' fill='%231c150d'/%3E%3Ctext x='200' y='305' fill='%236e5a37' font-family='monospace' font-size='20' text-anchor='middle'%3ECOVER PENDING%3C/text%3E%3C/svg%3E" alt="Cover of Fic 01" loading="lazy"></div>
+      <div class="moex-fic-body">
+        <div class="moex-fic-no">FIC. 01</div>
+        <h3 class="moex-fic-title">Your Fic Title Here</h3>
+        <ul class="moex-fic-tags" aria-label="Tags">
+          <li>tag one</li><li>tag two</li><li>tag three</li><li>tag four</li>
+        </ul>
+        <div class="moex-fic-desc" tabindex="0" role="region" aria-label="Description of Fic 01">
+          <p>TODO: replace this with your description. This box has a max height, so if your blurb runs long it scrolls inside the card instead of stretching the page.</p>
+          <p>Add as many paragraphs as you like. Keep each one inside its own p tag.</p>
+          <p>Placeholder text, placeholder text, placeholder text. Placeholder text, placeholder text, placeholder text. Placeholder text, placeholder text, placeholder text.</p>
+          <p>The last paragraph goes here.</p>
+        </div>
+        <div class="moex-fic-links">
+          <a class="moex-fic-btn" href="#" target="_blank" rel="noopener noreferrer">Read on Wattpad ↗</a>
+          <a class="moex-fic-btn" href="#" target="_blank" rel="noopener noreferrer">Read on AO3 ↗</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="moex-fic-row">
+      <!-- FIC 02: no cover, AO3 only. TODO: title, tags, description, link -->
+      <article class="moex-fic">
+        <div class="moex-fic-body">
+          <div class="moex-fic-no">FIC. 02</div>
+          <h3 class="moex-fic-title">Your Second Fic Title</h3>
+          <ul class="moex-fic-tags" aria-label="Tags"><li>tag one</li><li>tag two</li><li>tag three</li></ul>
+          <div class="moex-fic-desc" tabindex="0" role="region" aria-label="Description of Fic 02">
+            <p>TODO: replace this with your description. It scrolls if it gets too long.</p>
+          </div>
+          <div class="moex-fic-links"><a class="moex-fic-btn" href="#" target="_blank" rel="noopener noreferrer">Read on AO3 ↗</a></div>
+        </div>
+      </article>
+
+      <!-- FIC 03: no cover, AO3 only. TODO: title, tags, description, link -->
+      <article class="moex-fic">
+        <div class="moex-fic-body">
+          <div class="moex-fic-no">FIC. 03</div>
+          <h3 class="moex-fic-title">Your Third Fic Title</h3>
+          <ul class="moex-fic-tags" aria-label="Tags"><li>tag one</li><li>tag two</li><li>tag three</li></ul>
+          <div class="moex-fic-desc" tabindex="0" role="region" aria-label="Description of Fic 03">
+            <p>TODO: replace this with your description. It scrolls if it gets too long.</p>
+          </div>
+          <div class="moex-fic-links"><a class="moex-fic-btn" href="#" target="_blank" rel="noopener noreferrer">Read on AO3 ↗</a></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1128,7 +1227,7 @@ input[type=range]::-moz-range-thumb{
     </button>
   </div>
 
-  <div class="moex-note moex-scroll" id="moexNote"></div>
+  <div class="moex-note" id="moexNote"></div>
 </section>
 
 <!-- GALLERY -->
@@ -1140,43 +1239,27 @@ input[type=range]::-moz-range-thumb{
     <div class="moex-photo-grid">
       <div class="moex-photo">
         <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/Konni_Hq.jpg" alt="REF. 01"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 01 — Konni HQ, exact date unknown</div>
+        <div class="moex-photo-caption">REF. 01 — Konni HQ, exact date unknown</div>
       </div>
       <div class="moex-photo">
         <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/Sideprofile.jpg" alt="REF. 02"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 02 — Date night</div>
+        <div class="moex-photo-caption">REF. 02 — Date night</div>
       </div>
       <div class="moex-photo">
         <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/maka.jpg" alt="REF. 03"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 03 — the pin he thinks I don't notice him wearing for me</div>
+        <div class="moex-photo-caption">REF. 03 — the pin he thinks I don't notice him wearing for me</div>
       </div>
       <div class="moex-photo">
         <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/beach.jpg" alt="REF. 04"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 04 — somewhere he wasn't supposed to be. with me.</div>
+        <div class="moex-photo-caption">REF. 04 — somewhere he wasn't supposed to be. with me.</div>
       </div>
       <div class="moex-photo">
         <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/angel.jpg" alt="REF. 05"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 05 — the only target he's ever let get close</div>
+        <div class="moex-photo-caption">REF. 05 — the only target he's ever let get close</div>
       </div>
       <div class="moex-photo">
         <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/Mak_office.jpg" alt="REF. 06"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 06 — the wolf, mid-thought, unaware he's being watched</div>
-      </div>
-      <div class="moex-photo">
-        <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/angel.jpg" alt="REF. 07"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 07 — the day you made me truly yours</div>
-      </div>
-      <div class="moex-photo">
-        <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/Mak_office.jpg" alt="REF. 08"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 08 — ...</div>
-      </div>
-      <div class="moex-photo">
-        <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/angel.jpg" alt="REF. 09"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 09 — ...</div>
-      </div>
-      <div class="moex-photo">
-        <div class="moex-photo-frame"><img src="https://file.garden/ad35P9foF0kAW7I8/Mak_office.jpg" alt="REF. 10"></div>
-        <div class="moex-photo-caption moex-scroll">REF. 10 — ...</div>
+        <div class="moex-photo-caption">REF. 06 — the wolf, mid-thought, unaware he's being watched</div>
       </div>
     </div>
   </div>
@@ -1188,15 +1271,20 @@ input[type=range]::-moz-range-thumb{
       <div class="moex-slider-track" id="moexSliderTrack">
         <div class="moex-slide">
           <img src="https://file.garden/ad35P9foF0kAW7I8/garden.jpg" alt="Photo 1">
-          <div class="moex-slide-caption moex-scroll">REF. 11 — caption goes here</div>
+          <div class="moex-slide-caption">REF. 07 — caption goes here</div>
         </div>
         <div class="moex-slide">
           <img src="https://file.garden/ad35P9foF0kAW7I8/bnw.jpg" alt="Photo 2">
-          <div class="moex-slide-caption moex-scroll">REF. 12 — caption goes here</div>
+          <div class="moex-slide-caption">REF. 08 — caption goes here</div>
         </div>
         <div class="moex-slide">
           <img src="https://file.garden/ad35P9foF0kAW7I8/gun.jpg" alt="Photo 3">
-          <div class="moex-slide-caption moex-scroll">REF. 13 — caption goes here</div>
+          <div class="moex-slide-caption">REF. 09 — caption goes here</div>
+        </div>
+        <div class="moex-slide">
+          <!-- TODO: replace the src below with your REF. 10 image link -->
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect width='400' height='500' fill='%231c150d'/%3E%3Ctext x='200' y='255' fill='%236e5a37' font-family='monospace' font-size='20' text-anchor='middle'%3EIMAGE PENDING%3C/text%3E%3C/svg%3E" alt="Photo 4">
+          <div class="moex-slide-caption">REF. 10 — caption goes here</div>
         </div>
       </div>
       <button class="moex-slider-arrow moex-slider-prev" id="moexSliderPrev" aria-label="Previous photo">◄</button>
@@ -1219,7 +1307,7 @@ input[type=range]::-moz-range-thumb{
     <div class="moex-player-main">
       <div class="moex-progress-row">
         <span class="moex-progress-time" id="moexTimeCur">0:00</span>
-        <div class="moex-progress-track" id="moexProgressTrack"><div class="moex-progress-fill" id="moexProgressFill"></div></div>
+        <div class="moex-progress-track" id="moexProgressTrack"><div class="moex-progress-fill" id="moexTrackFill"></div></div>
         <span class="moex-progress-time" id="moexTimeTotal">3:47</span>
       </div>
       <div class="moex-controls">
@@ -1228,10 +1316,6 @@ input[type=range]::-moz-range-thumb{
         <button class="moex-btn-play" id="moexPlayBtn" title="play/pause">▶</button>
         <button id="moexNext" title="next">⏭</button>
         <button id="moexRepeat" title="repeat">↻</button>
-      </div>
-      <div class="moex-volume-row">
-        <span style="font-family:var(--moex-font-mono);font-size:.65rem;color:var(--moex-bone-dim);">VOL</span>
-        <input type="range" id="moexVolume" min="0" max="100" value="45">
       </div>
       <div class="moex-tracklist" id="moexTracklist"></div>
     </div>
@@ -1249,33 +1333,11 @@ input[type=range]::-moz-range-thumb{
   </div>
 </section>
 
-<!-- INTERCEPTED TRANSMISSIONS -->
-<section class="moex-section" id="moex-comms">
-  <div class="moex-tag">Signals Intelligence</div>
-  <h2 class="moex-h2">Intercepted Transmissions</h2>
-  <p class="moex-section-intro">Three conversations pulled off a private line. Tap to decrypt them one message at a time.</p>
-
-  <div class="moex-comms">
-    <div class="moex-comms-tabs" id="moexCommsTabs" role="tablist" aria-label="Intercepted threads"></div>
-    <div class="moex-phone">
-      <div class="moex-phone-head">
-        <span>M. ⇄ A.</span>
-        <span class="moex-phone-status"><i></i>ENCRYPTED</span>
-      </div>
-      <div class="moex-chat" id="moexChat" role="log" aria-live="polite" tabindex="0" aria-label="Decrypted messages"></div>
-      <div class="moex-phone-foot">
-        <span class="moex-comms-count" id="moexCommsCount">0 / 0</span>
-        <button type="button" class="moex-quiz-btn" id="moexCommsNext">Decrypt</button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CLEARANCE QUIZ -->
 <section class="moex-section" id="moex-quiz">
   <div class="moex-tag">Clearance Check</div>
   <h2 class="moex-h2">Prove You Know The File</h2>
-  <p class="moex-quiz-intro">Five questions on the man and the war that made him. Get every one right and the sealed transmission opens.</p>
+  <p class="moex-quiz-intro">Ten questions on the man and the wars that made him, from the 2009 original to the 2023 reboot. Get every one right and the sealed transmission opens.</p>
 
   <div class="moex-quiz" id="moexQuiz">
     <div class="moex-quiz-panel moex-quiz-start moex-active" id="moexQuizStart">
@@ -1285,7 +1347,7 @@ input[type=range]::-moz-range-thumb{
 
     <div class="moex-quiz-panel" id="moexQuizRun" aria-live="polite">
       <div class="moex-quiz-top">
-        <span id="moexQuizCount">QUESTION 1 / 5</span>
+        <span id="moexQuizCount">QUESTION 1 / 10</span>
         <div class="moex-quiz-bar"><i id="moexQuizBar"></i></div>
       </div>
       <h3 class="moex-quiz-q" id="moexQuizQ"></h3>
@@ -1296,7 +1358,10 @@ input[type=range]::-moz-range-thumb{
       <div class="moex-quiz-stamp" id="moexQuizStamp"></div>
       <p class="moex-quiz-score" id="moexQuizScore"></p>
       <p class="moex-quiz-msg" id="moexQuizMsg"></p>
-      <button type="button" class="moex-quiz-btn" id="moexQuizAgain">Try again</button>
+      <div class="moex-quiz-actions">
+        <button type="button" class="moex-quiz-btn" id="moexQuizAgain">Try again</button>
+        <button type="button" class="moex-quiz-btn" id="moexQuizRestart" hidden>Try again</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1318,7 +1383,7 @@ input[type=range]::-moz-range-thumb{
   <div class="moex-modal">
     <button class="moex-modal-close" id="moexModalClose">✕</button>
     <h3 id="moexModalTitle">Letter</h3>
-    <p id="moexModalBody" class="moex-scroll">...</p>
+    <p id="moexModalBody">...</p>
     <div class="moex-modal-sign">— A.</div>
     <div class="moex-modal-nav">
       <button id="moexModalPrev">◄ previous</button>
@@ -1334,15 +1399,15 @@ input[type=range]::-moz-range-thumb{
   <button class="moex-lb-btn moex-lb-next" id="moexLbNext" aria-label="Next photo">►</button>
   <div class="moex-lb-frame">
     <img id="moexLbImg" src="" alt="">
-    <div class="moex-lb-cap moex-scroll" id="moexLbCap"></div>
+    <div class="moex-lb-cap" id="moexLbCap"></div>
   </div>
   <div class="moex-lb-count" id="moexLbCount"></div>
 </div>
 
-<!-- EASTER EGG OVERLAY -->
+<!-- CLEARANCE QUIZ REWARD -->
 <div class="moex-egg-overlay" id="moexEggOverlay">
   <h2>TRANSMISSION DECRYPTED</h2>
-  <p class="moex-scroll">"You answered every question without a single slip. Somehow that feels about right — you were always going to get through my defenses eventually, зайка. Every wolf has exactly one weakness. Congratulations, you're standing in it." — M.</p>
+  <p>"You answered every question without a single slip. Somehow that feels about right — you were always going to get through my defenses eventually, зайка. Every wolf has exactly one weakness. Congratulations, you're standing in it." — M.</p>
   <button id="moexEggClose">CLOSE FILE</button>
 </div>
 
@@ -1361,12 +1426,12 @@ input[type=range]::-moz-range-thumb{
       cursor.style.transform = 'translate('+e.clientX+'px,'+e.clientY+'px) translate(-50%,-50%)';
     });
     document.addEventListener('mouseover', function(e){
-      if(e.target.closest('a,button,.moex-photo,.moex-envelope,.moex-redact,input[type=range]')){
+      if(e.target.closest('a,button,.moex-photo,.moex-envelope,.moex-slide')){
         cursor.classList.add('moex-hover');
       }
     });
     document.addEventListener('mouseout', function(e){
-      if(e.target.closest('a,button,.moex-photo,.moex-envelope,.moex-redact,input[type=range]')){
+      if(e.target.closest('a,button,.moex-photo,.moex-envelope,.moex-slide')){
         cursor.classList.remove('moex-hover');
       }
     });
@@ -1405,10 +1470,11 @@ input[type=range]::-moz-range-thumb{
 
   /* ---------- stampcard/dossier-file redact reveal ---------- */
   document.querySelectorAll('.moex-redact').forEach(function(el){
-    var mask = el.textContent;
     function toggle(){
       var revealed = el.classList.toggle('moex-revealed');
-      el.textContent = revealed ? el.getAttribute('data-value') : mask;
+      if(revealed){ el.dataset.bar = el.textContent; el.textContent = el.getAttribute('data-value'); }
+      else { el.textContent = el.dataset.bar; }
+      if(navigator.vibrate) navigator.vibrate(12);
     }
     el.addEventListener('click', toggle);
     el.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
@@ -1480,10 +1546,12 @@ input[type=range]::-moz-range-thumb{
     }
   }
   window.addEventListener('load', drawStrings);
+  window.addEventListener('resize', drawStrings);
+  setTimeout(drawStrings, 300);
+  window.addEventListener('orientationchange', function(){ setTimeout(drawStrings, 250); });
   if('ResizeObserver' in window){
-    new ResizeObserver(drawStrings).observe(document.getElementById('moexCorkboard'));
-  } else {
-    window.addEventListener('resize', drawStrings);
+    var strRo = new ResizeObserver(function(){ drawStrings(); });
+    strRo.observe(document.getElementById('moexCorkboard'));
   }
   document.querySelectorAll('#moexCorkboard img').forEach(function(im){
     if(!im.complete) im.addEventListener('load', drawStrings);
@@ -1565,7 +1633,7 @@ input[type=range]::-moz-range-thumb{
     document.getElementById('moexNowTag').textContent = t.tag;
     document.getElementById('moexTimeTotal').textContent = fmtTime(t.len);
     document.getElementById('moexTimeCur').textContent = '0:00';
-    document.getElementById('moexProgressFill').style.width = '0%';
+    document.getElementById('moexTrackFill').style.width = '0%';
     document.querySelectorAll('.moex-track').forEach(function(r){ r.classList.remove('moex-track-active'); });
     var active = tracklistEl.querySelector('[data-idx="'+idx+'"]');
     if(active) active.classList.add('moex-track-active');
@@ -1590,9 +1658,9 @@ input[type=range]::-moz-range-thumb{
       osc.start(); lfo.start();
     }catch(e){ /* ambient audio unsupported, silently continue */ }
   }
-  function updateAmbient(){
+    function updateAmbient(){
     if(!gainNode) return;
-    var vol = document.getElementById('moexVolume').value / 100;
+    var vol = 0.45;
     var target = isPlaying ? vol * 0.05 : 0;
     gainNode.gain.setTargetAtTime(target, audioCtx.currentTime, .4);
   }
@@ -1613,7 +1681,7 @@ input[type=range]::-moz-range-thumb{
           else { nextTrack(); return; }
         }
         document.getElementById('moexTimeCur').textContent = fmtTime(curSeconds);
-        document.getElementById('moexProgressFill').style.width = (curSeconds/total*100)+'%';
+        document.getElementById('moexTrackFill').style.width = (curSeconds/total*100)+'%';
       }, 1000);
     } else {
       clearInterval(progInterval);
@@ -1639,13 +1707,12 @@ input[type=range]::-moz-range-thumb{
   document.getElementById('moexRepeat').addEventListener('click', function(){
     repeatOn = !repeatOn; this.classList.toggle('moex-toggle-active', repeatOn);
   });
-  document.getElementById('moexVolume').addEventListener('input', updateAmbient);
   document.getElementById('moexProgressTrack').addEventListener('click', function(e){
     var rect = this.getBoundingClientRect();
     var pct = (e.clientX - rect.left) / rect.width;
     curSeconds = Math.floor(pct * tracks[curIdx].len);
     document.getElementById('moexTimeCur').textContent = fmtTime(curSeconds);
-    document.getElementById('moexProgressFill').style.width = (pct*100)+'%';
+    document.getElementById('moexTrackFill').style.width = (pct*100)+'%';
   });
   /* ---------- letters modal ---------- */
   var letters = [
@@ -1671,7 +1738,9 @@ input[type=range]::-moz-range-thumb{
 
   /* ---------- anniversary counter ---------- */
   var annivDate = new Date("2019-11-07T00:00:00");
+  var annivBusy = false;
   function updateAnniv(){
+    if(annivBusy) return;
     var now = new Date();
     var diffMs = now - annivDate;
     var days = Math.floor(diffMs / 86400000);
@@ -1692,7 +1761,17 @@ input[type=range]::-moz-range-thumb{
       {q:"What is the first name of Zakhaev's son, whose death helps Makarov rise to power?",
        a:"Victor", w:["Alexei","Nikolai","Dmitri"]},
       {q:"In Modern Warfare 2, Makarov leads a massacre at Zakhaev International Airport in which mission?",
-       a:"No Russian", w:["Cliffhanger","Loose Ends","Second Sun"]}
+       a:"No Russian", w:["Cliffhanger","Loose Ends","Second Sun"]},
+      {q:"In that airport massacre mission, which alias does the undercover CIA agent Joseph Allen use?",
+       a:"Alexei Borodin", w:["Nikolai Volkov","Dmitri Petrenko","Yuri Antonov"]},
+      {q:"In the rebooted timeline, Makarov is captured in April 2019 and sentenced to life. Where is he captured?",
+       a:"Verdansk Stadium", w:["Las Almas","Zakhaev International Airport","Urzikstan Airfield"]},
+      {q:"In Modern Warfare III (2023), which Russian private military company does Makarov command?",
+       a:"Konni Group", w:["Shadow Company","Al-Qatala","Urzikstan Liberation Force"]},
+      {q:"In 2023, which prison complex in Verdansk does that group raid to free Makarov?",
+       a:"Zordaya Prison Complex", w:["Petrov Maximum Facility","Kastovia Central Gulag","Gora Penitentiary"]},
+      {q:"What is the name of the opening mission of Modern Warfare III (2023), where Makarov is broken out of prison?",
+       a:"Operation 627", w:["Operation Black Ice","Operation Red Dawn","Operation Nightfall"]}
     ];
     var panels = {
       start: document.getElementById('moexQuizStart'),
@@ -1707,6 +1786,7 @@ input[type=range]::-moz-range-thumb{
     var elScore = document.getElementById('moexQuizScore');
     var elMsg = document.getElementById('moexQuizMsg');
     var btnAgain = document.getElementById('moexQuizAgain');
+    var btnRestart = document.getElementById('moexQuizRestart');
     var qi = 0, score = 0, locked = false, timer = null;
 
     function show(name){
@@ -1760,6 +1840,7 @@ input[type=range]::-moz-range-thumb{
         elStamp.className = 'moex-quiz-stamp moex-pass';
         elMsg.textContent = 'Flawless. The transmission is yours.';
         btnAgain.textContent = 'Replay transmission';
+        btnRestart.hidden = false;
         show('result');
         setTimeout(triggerEgg, 700);
       } else {
@@ -1767,6 +1848,7 @@ input[type=range]::-moz-range-thumb{
         elStamp.className = 'moex-quiz-stamp moex-fail';
         elMsg.textContent = 'Not quite. Every answer has to be right. Try again.';
         btnAgain.textContent = 'Try again';
+        btnRestart.hidden = true;
         show('result');
       }
     }
@@ -1777,6 +1859,7 @@ input[type=range]::-moz-range-thumb{
       show('run');
     }
     document.getElementById('moexQuizBegin').addEventListener('click', start);
+    btnRestart.addEventListener('click', start);
     btnAgain.addEventListener('click', function(){
       if(score === QUESTIONS.length && qi >= QUESTIONS.length){ triggerEgg(); } else { start(); }
     });
@@ -1794,6 +1877,7 @@ input[type=range]::-moz-range-thumb{
     h.textContent = '♥';
     h.style.left = (Math.random()*100)+'vw';
     h.style.top = '105vh';
+    h.style.opacity = '1';
     document.body.appendChild(h);
     var duration = 2200 + Math.random()*1500;
     var startTime = performance.now();
@@ -1847,125 +1931,6 @@ input[type=range]::-moz-range-thumb{
     });
   })();
 
-  /* ---------- intercepted transmissions (decrypt chat) ---------- */
-  (function(){
-    var THREADS = [
-      {tab:'02:14 · Late', msgs:[
-        ['M','02:14',"Delayed. Do not wait up."],
-        ['A','02:14',"I'm not waiting. I'm just awake near the door."],
-        ['M','02:15',"That is waiting."],
-        ['A','02:15',"Fine. I'm waiting."],
-        ['M','02:16',"Leave the light on."],
-        ['A','02:16',"It was never off."],
-        ['M','02:17',"I know. I saw it from the road."]
-      ]},
-      {tab:'06:40 · Tea', msgs:[
-        ['A','06:40',"you left your tea. it's still hot"],
-        ['M','06:41',"I know. I left it on purpose."],
-        ['A','06:41',"why"],
-        ['M','06:42',"So you would have a reason to think of me before you finished it."],
-        ['A','06:42',"that is the most you thing you've ever said"],
-        ['M','06:43',"Drink it. Then think of me anyway."]
-      ]},
-      {tab:'Six Hours', msgs:[
-        ['A','18:52',"my train was delayed. no signal in the tunnel. sorry"],
-        ['M','18:52',"Six hours."],
-        ['A','18:53',"I know"],
-        ['M','18:53',"I counted them."],
-        ['A','18:54',"I'm fine. I'm literally fine"],
-        ['M','18:54',"I know that now. Do not do it again."],
-        ['A','18:55',"I'll text first next time. promise"],
-        ['M','18:56',"Good. Come home, зайка."]
-      ]}
-    ];
-
-    var tabsEl = document.getElementById('moexCommsTabs');
-    var chat = document.getElementById('moexChat');
-    var nextBtn = document.getElementById('moexCommsNext');
-    var countEl = document.getElementById('moexCommsCount');
-    var ti = 0, mi = 0, busy = false, timer = null;
-
-    function el(tag, cls, text){
-      var n = document.createElement(tag);
-      if(cls) n.className = cls;
-      if(text != null) n.textContent = text;
-      return n;
-    }
-    function toBottom(){ chat.scrollTop = chat.scrollHeight; }
-    function refresh(){
-      var len = THREADS[ti].msgs.length;
-      countEl.textContent = mi + ' / ' + len;
-      nextBtn.textContent = mi === 0 ? 'Decrypt' : (mi >= len ? 'Replay' : 'Decrypt next');
-      nextBtn.disabled = busy;
-    }
-    function reset(i){
-      clearTimeout(timer);
-      busy = false; ti = i; mi = 0;
-      chat.innerHTML = '';
-      chat.appendChild(el('div', 'moex-chat-empty', 'LINE SECURED. MESSAGES ARE ENCRYPTED. TAP DECRYPT TO READ.'));
-      Array.prototype.forEach.call(tabsEl.children, function(b, bi){
-        var on = bi === i;
-        b.classList.toggle('moex-active', on);
-        b.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      refresh();
-    }
-    function step(){
-      if(busy) return;
-      var thread = THREADS[ti];
-      if(mi >= thread.msgs.length){ reset(ti); return; }
-      var m = thread.msgs[mi];
-      var empty = chat.querySelector('.moex-chat-empty');
-      if(empty) empty.remove();
-      var side = m[0] === 'M' ? 'moex-msg-m' : 'moex-msg-a';
-      var typing = el('div', 'moex-typing ' + side);
-      typing.setAttribute('aria-hidden', 'true');
-      typing.appendChild(el('span')); typing.appendChild(el('span')); typing.appendChild(el('span'));
-      chat.appendChild(typing);
-      busy = true; refresh(); toBottom();
-      timer = setTimeout(function(){
-        typing.remove();
-        var bubble = el('div', 'moex-msg ' + side, m[2]);
-        bubble.appendChild(el('small', null, m[0] + '. · ' + m[1]));
-        chat.appendChild(bubble);
-        mi++; busy = false;
-        if(mi >= thread.msgs.length){ chat.appendChild(el('div', 'moex-chat-end', 'END OF TRANSMISSION')); }
-        refresh(); toBottom();
-      }, 600 + Math.min(700, m[2].length * 12));
-    }
-
-    THREADS.forEach(function(t, i){
-      var b = el('button', 'moex-comms-tab', t.tab);
-      b.type = 'button';
-      b.setAttribute('role', 'tab');
-      b.addEventListener('click', function(){ reset(i); });
-      tabsEl.appendChild(b);
-    });
-    nextBtn.addEventListener('click', step);
-    reset(0);
-  })();
-
-  /* ---------- scrollable description boxes: fade hint + keyboard focus only while they overflow ---------- */
-  (function(){
-    function refresh(b){
-      var overflow = b.scrollHeight - b.clientHeight > 2;
-      var more = overflow && b.scrollTop + b.clientHeight < b.scrollHeight - 2;
-      b.classList.toggle('moex-more', more);
-      if(overflow && !b.closest('[role="button"]')){ b.setAttribute('tabindex', '0'); }
-      else { b.removeAttribute('tabindex'); }
-    }
-    var boxes = document.querySelectorAll('.moex-scroll');
-    boxes.forEach(function(b){
-      function run(){ refresh(b); }
-      b.addEventListener('scroll', run, {passive:true});
-      window.addEventListener('resize', run);
-      if('ResizeObserver' in window){ new ResizeObserver(run).observe(b); }       /* tab/modal/lightbox opening */
-      if('MutationObserver' in window){ new MutationObserver(run).observe(b, {childList:true, characterData:true, subtree:true}); } /* text swapped in */
-      run();
-    });
-    window.addEventListener('load', function(){ boxes.forEach(refresh); });
-  })();
-
   /* ---------- scroll thread progress bar ---------- */
   (function(){
     var fill = document.getElementById('moexScrollFill');
@@ -1985,7 +1950,7 @@ input[type=range]::-moz-range-thumb{
 
   /* ---------- staggered reveal for pins + photos ---------- */
   (function(){
-    var els = document.querySelectorAll('.moex-pin, .moex-photo');
+    var els = document.querySelectorAll('.moex-pin, .moex-photo, .moex-fic');
     els.forEach(function(el, i){
       el.classList.add('moex-reveal');
       el.style.setProperty('--d', ((i % 4) * 0.09) + 's');
@@ -2004,7 +1969,7 @@ input[type=range]::-moz-range-thumb{
 
   /* ---------- corkboard photo lightbox (tap to enlarge, swipe to browse) ---------- */
   (function(){
-    var photos = Array.prototype.slice.call(document.querySelectorAll('#moexCorkboard .moex-photo'));
+    var photos = Array.prototype.slice.call(document.querySelectorAll('#moexCorkboard .moex-photo, #moexSlider .moex-slide'));
     var lb = document.getElementById('moexLb');
     var lbImg = document.getElementById('moexLbImg');
     var lbCap = document.getElementById('moexLbCap');
@@ -2017,7 +1982,7 @@ input[type=range]::-moz-range-thumb{
       var im = p.querySelector('img');
       lbImg.src = im.getAttribute('src');
       lbImg.alt = im.getAttribute('alt') || '';
-      lbCap.textContent = p.querySelector('.moex-photo-caption').textContent;
+      lbCap.textContent = p.querySelector('.moex-photo-caption, .moex-slide-caption').textContent;
       lbCount.textContent = (cur + 1) + ' / ' + photos.length;
     }
     function open(i){
@@ -2057,6 +2022,139 @@ input[type=range]::-moz-range-thumb{
       var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
       if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4){ show(dx < 0 ? cur + 1 : cur - 1); }
     }, {passive:true});
+  })();
+
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- boot screen (once per session, tap to skip) ---------- */
+  (function(){
+    var boot = document.getElementById('moexBoot');
+    if(!boot) return;
+    var seen = false;
+    try{ seen = sessionStorage.getItem('moexBooted') === '1'; }catch(e){}
+    if(seen || reduceMotion){ boot.parentNode.removeChild(boot); return; }
+    document.body.classList.add('moex-booting');
+    var line = document.getElementById('moexBootLine');
+    ['VERIFYING CLEARANCE...','MATCHING FILE: MAKAROV, V.','ACCESS GRANTED — WELCOME, A.'].forEach(function(m,i){
+      setTimeout(function(){ line.textContent = m; }, i*700);
+    });
+    function done(){
+      if(boot.classList.contains('moex-boot-out')) return;
+      boot.classList.add('moex-boot-out');
+      document.body.classList.remove('moex-booting');
+      try{ sessionStorage.setItem('moexBooted','1'); }catch(e){}
+      setTimeout(function(){ if(boot.parentNode) boot.parentNode.removeChild(boot); }, 600);
+    }
+    setTimeout(done, 2400);
+    boot.addEventListener('click', done);
+  })();
+
+  /* ---------- glitch burst on hover / tap ---------- */
+  (function(){
+    var h = document.querySelector('.moex-glitch'), t;
+    if(!h) return;
+    function hit(){
+      h.classList.remove('moex-burst'); void h.offsetWidth; h.classList.add('moex-burst');
+      clearTimeout(t); t = setTimeout(function(){ h.classList.remove('moex-burst'); }, 750);
+    }
+    h.addEventListener('mouseenter', hit);
+    h.addEventListener('click', hit);
+  })();
+
+  /* ---------- decode effect on section headings ---------- */
+  (function(){
+    var hs = document.querySelectorAll('.moex-h2');
+    if(reduceMotion || !('IntersectionObserver' in window)) return;
+    var chars = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789#%&@';
+    function run(el){
+      var txt = el.textContent, t0 = performance.now(), dur = 650;
+      el.setAttribute('aria-label', txt);
+      (function step(now){
+        var p = Math.min(1, (now - t0) / dur), keep = Math.floor(txt.length * p), out = '';
+        for(var i = 0; i < txt.length; i++){
+          out += (i < keep || txt[i] === ' ') ? txt[i] : chars[Math.floor(Math.random() * chars.length)];
+        }
+        el.textContent = out;
+        if(p < 1) requestAnimationFrame(step);
+      })(t0);
+    }
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ io.unobserve(e.target); run(e.target); } });
+    }, {threshold:.6});
+    hs.forEach(function(h){ io.observe(h); });
+  })();
+
+  /* ---------- stamps slam in on scroll ---------- */
+  (function(){
+    var els = document.querySelectorAll('.moex-stamp, .moex-footer-stamp');
+    els.forEach(function(e){ e.classList.add('moex-slam'); });
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('moex-in'); }); return; }
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('moex-in'); io.unobserve(e.target); } });
+    }, {threshold:.6});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  /* ---------- dossier tabs: swipe + arrow keys ---------- */
+  (function(){
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.moex-tabbtn'));
+    function cur(){ for(var i = 0; i < btns.length; i++){ if(btns[i].classList.contains('moex-active')) return i; } return 0; }
+    function go(i){ if(i >= 0 && i < btns.length){ btns[i].click(); return true; } return false; }
+    var sx = 0, sy = 0;
+    document.querySelectorAll('.moex-tabpanel').forEach(function(p){
+      p.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+      p.addEventListener('touchend', function(e){
+        var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) go(cur() + (dx < 0 ? 1 : -1));
+      }, {passive:true});
+    });
+    btns.forEach(function(b, i){
+      b.addEventListener('keydown', function(e){
+        var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+        if(n !== null && go(n)){ e.preventDefault(); btns[n].focus(); }
+      });
+    });
+  })();
+
+  /* ---------- letters modal: Esc, arrows, swipe, scroll lock ---------- */
+  (function(){
+    var ov = document.getElementById('moexModalOverlay'), box = ov.querySelector('.moex-modal');
+    new MutationObserver(function(){
+      document.body.style.overflow = ov.classList.contains('moex-open') ? 'hidden' : '';
+    }).observe(ov, {attributes:true, attributeFilter:['class']});
+    document.addEventListener('keydown', function(e){
+      if(!ov.classList.contains('moex-open')) return;
+      if(e.key === 'Escape') ov.classList.remove('moex-open');
+      if(e.key === 'ArrowRight') document.getElementById('moexModalNext').click();
+      if(e.key === 'ArrowLeft') document.getElementById('moexModalPrev').click();
+    });
+    var sx = 0, sy = 0;
+    box.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+    box.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5){
+        document.getElementById(dx < 0 ? 'moexModalNext' : 'moexModalPrev').click();
+      }
+    }, {passive:true});
+  })();
+
+  /* ---------- days-together counter counts up when seen ---------- */
+  (function(){
+    var el = document.getElementById('moexAnniversary');
+    if(reduceMotion || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(es){
+      if(!es[0].isIntersecting) return;
+      io.disconnect();
+      var days = Math.floor((new Date() - annivDate) / 86400000), t0 = performance.now(), dur = 1600;
+      annivBusy = true;
+      (function step(now){
+        var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = 'DAYS ON FILE TOGETHER: ' + Math.round(days * e).toLocaleString();
+        if(p < 1) requestAnimationFrame(step); else annivBusy = false;
+      })(t0);
+    }, {threshold:.8});
+    io.observe(el);
   })();
 
 })();
